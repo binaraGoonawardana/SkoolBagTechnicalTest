@@ -1,4 +1,6 @@
-# Front-End App -- Technical Test-SkoolBag
+# Technical Test - SkoolBag
+
+## Front-End App
 
 #### Running application on Docker Container
 
