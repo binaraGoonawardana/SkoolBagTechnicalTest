@@ -1,0 +1,109 @@
+<form [formGroup]="schoolRegistrationForm" class="needs-validation" (ngSubmit)="onSubmit()">
+  
+  <div class="alert alert-success" role="alert" *ngIf="formStatus === 'Succeed'">
+    A simple success alert—check it out!
+  </div>
+
+  <div class="mb-3">
+    <label for="sclName">Name</label>
+    <div class="input-group">
+      <input 
+        type="text" 
+        class="form-control" 
+        id="sclName"
+        formControlName="name" 
+        placeholder="Australian International High School"
+        [ngClass]="{ 'is-invalid': formSubmitAttempt && srForm.name.errors }"   
+      >
+    </div>
+  </div>
+
+  <div class="row" formGroupName="address">
+    <div class="col-md-8 mb-3">
+      <label for="sclStreet">Street</label>
+      <input 
+          type="text" 
+          class="form-control" 
+          id="sclStreet"
+          formControlName="street"
+          placeholder="Level 6/505 George St"  
+          [ngClass]="{ 'is-invalid': formSubmitAttempt && schoolRegistrationForm.get('address.street').errors }"
+      >
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="sclSuburb">Suburb</label>
+      <input 
+          type="text" 
+          class="form-control" 
+          id="sclSuburb"
+          formControlName="suburb"
+          placeholder="Sydney"  
+          [ngClass]="{ 'is-invalid': formSubmitAttempt && schoolRegistrationForm.get('address.suburb').errors }"
+      >
+    </div>
+  </div>
+
+  <div class="row" formGroupName="address">
+    <div class="col-md-4 mb-3">
+      <label for="sclPostcode">Postcode</label>
+      <input 
+          type="text" 
+          class="form-control" 
+          id="sclPostcode"
+          formControlName="postcode"
+          placeholder="NSW 2000"
+          [ngClass]="{ 'is-invalid': formSubmitAttempt && schoolRegistrationForm.get('address.postcode').errors }"
+      >
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="sclState">State</label>
+      <input 
+          type="text" 
+          class="form-control" 
+          id="sclState" 
+          formControlName="state"
+          placeholder="New South Wales" 
+          [ngClass]="{ 'is-invalid': formSubmitAttempt && schoolRegistrationForm.get('address.state').errors }"
+      >
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5 mb-3">
+      <label for="sclOperatedBy">Operated by</label>
+      <select 
+          class="custom-select d-block w-100" 
+          id="sclOperatedBy" 
+          formControlName="operatedBy" 
+          [ngClass]="{ 'is-invalid': formSubmitAttempt && srForm.operatedBy.errors }">
+              <option value="">Choose...</option>
+              <option>Government</option>
+              <option>Non-Government</option>
+      </select>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="sclStudentCount">No of Students</label>
+      <input 
+          type="number" 
+          class="form-control" 
+          id="sclStudentCount" 
+          formControlName="studentCount" 
+          [ngClass]="{ 'is-invalid': formSubmitAttempt && srForm.studentCount.errors }"
+      >
+      <div *ngIf="formSubmitAttempt && srForm.studentCount.errors" class="invalid-feedback">
+        <div *ngIf="srForm.studentCount.errors.max">Max student count: 50000</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-3">
+      <button 
+          class="btn btn-primary btn-lg btn-block" 
+          type="submit" 
+          style="width: 40%"
+          [disabled]="formStatus === 'Processing'"
+          >
+            {{(formStatus === 'Processing')? "Registering...": "Register school"}}
+      </button>
+  </div>
+</form>

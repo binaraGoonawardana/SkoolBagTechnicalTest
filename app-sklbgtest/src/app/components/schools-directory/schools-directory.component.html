@@ -1,0 +1,67 @@
+<div class="border-bottom border-gray pb-2 mb-0">
+    <div class="d-flex justify-content-between align-items-center w-100">
+        <div class="d-flex align-items-center">
+            <img class="mr-3" src="../../assets/images/school.svg" alt="" width="40" height="40">
+            <div class="lh-100">
+                <h4 class="mb-0 pt-2 lh-100">Schools</h4>
+            </div>
+        </div>
+        <button type="button" class="btn btn-outline-primary btn-sm float-right" data-toggle="modal" data-target="#staticBackdrop">
+          New School
+        </button>
+    </div>
+</div>
+<div class="px-2 pt-2">
+    <!-- school list goes here -->
+    <div class="d-flex justify-content-center" *ngIf="isfetchingSchools">
+      <h5 class="mt-3 pt-2 lh-100 text-secondary">Fetching records...</h5>
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="!(schools.length > 0) && !isfetchingSchools && !hadErrorFetchingSchools">
+      <h5 class="mt-3 pt-2 lh-100 text-secondary">No records found.</h5>
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="hadErrorFetchingSchools && !isfetchingSchools && !(schools.length > 0)">
+      <div class="column">
+        <h5 class="mt-3 pt-2 lh-100 text-secondary">Error occurred while retriving school records.</h5>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="populateSchoolDirectory()">
+            <img src="../../assets/images/refresh_gray.svg" alt="" width="20" height="20">
+            Refresh
+          </button>
+        </div>
+      </div>
+    </div>
+    <table class="table w-auto small" *ngIf="schools.length > 0">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Type</th>
+        <th scope="col">No of Students</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let school of schools">
+        <td>{{school.name}}</td>
+        <td>{{school.address.street}}, {{school.address.suburb}}, {{school.address.postcode}}, {{school.address.state}}</td>
+        <td>{{school.operatedBy}}</td>
+        <td>{{school.studentCount}}</td>
+      </tr>
+    </tbody>
+</table>
+</div>
+<!-- Modal - Create New School -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">New School</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <school-registration-form (voted)="onVoted()"></school-registration-form>
+      </div>
+    </div>
+  </div>
+</div>
