@@ -33,7 +33,25 @@ const GetSchools = async (req, res) => {
   }
 }
 
+const SearchSchools = async (req, res) => {
+	let reqBody = req.body;
+
+	// remove invalid filter properties (empty and null fields)
+	let searchContext = Object.entries(reqBody).reduce((a,[k,v]) => { 
+		return ( (v == null || v == "") ? a : (a[k]=v, a))
+	}, {});
+
+	try {
+		let schools = await schoolWorker.search(searchContext);
+    	res.send(common.Success("", schools));
+  } catch (error) {
+    	res.status(500);
+		res.send(common.Error(error.message, undefined));
+  }
+}
+
 module.exports = {
 	RegisterNewSchool,
 	GetSchools,
+	SearchSchools
 }

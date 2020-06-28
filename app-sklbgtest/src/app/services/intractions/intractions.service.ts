@@ -13,6 +13,7 @@ export class IntractionsService {
   constructor() { }
 
   applyFilters(filters: Filters) {
+    // emit filter data that has subscribe to filterSource
     this._filterSource.next(filters);
   }
 }

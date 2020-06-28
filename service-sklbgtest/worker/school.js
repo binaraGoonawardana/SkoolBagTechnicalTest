@@ -1,4 +1,5 @@
 const axios = require('axios');
+const common = require('../common/common');
 
 const SCHOOL_API_URL = `https://${process.env.RESTDB_HOST}/rest/schools`;
 
@@ -45,25 +46,22 @@ const getAll = () => {
 	})
 }
 
-const findOne = (key, value) => {
+const search = (context) => {
 	
 	return new Promise( async (resolve, reject) => {
 		try {
-			let schools = await GetAll();
-			schools.filter((scl) => {
+			let schools = await getAll();
+			let filteredSchools = common.Filter(schools, context);
 
-			})
+			resolve(filteredSchools);
 		} catch (error) {
-			
+			reject(error);
 		}
 	});
-}
-
-const Search = (context) => {
-
 }
 
 module.exports = {
 	create,
 	getAll,
+	search
 }
