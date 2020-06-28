@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { HttpResponse, School, Filters } from 'src/app/types';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class SchoolService {
   };
 
   getSchools() {
-    return this.http.get<HttpResponse>("http://localhost:3030/v1/schools")
+    return this.http.get<HttpResponse>(`${environment.schoolsServiceUrl}/`)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -36,14 +37,14 @@ export class SchoolService {
   }
 
   createSchool(school: School) {
-    return this.http.post<HttpResponse>("http://localhost:3030/v1/schools", school)
+    return this.http.post<HttpResponse>(`${environment.schoolsServiceUrl}/`, school)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   searchSchools(filters: Filters) {
-    return this.http.post<HttpResponse>("http://localhost:3030/v1/schools/search", filters)
+    return this.http.post<HttpResponse>(`${environment.schoolsServiceUrl}/search`, filters)
       .pipe(
         catchError(this.handleError)
       );
