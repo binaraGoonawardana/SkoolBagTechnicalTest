@@ -1,7 +1,7 @@
 <form [formGroup]="schoolRegistrationForm" class="needs-validation" (ngSubmit)="onSubmit()">
   
   <div class="alert alert-success" role="alert" *ngIf="formStatus === 'Succeed'">
-    A simple success alert—check it out!
+    School registration completed successfully.
   </div>
 
   <div class="mb-3">
@@ -91,7 +91,7 @@
           [ngClass]="{ 'is-invalid': formSubmitAttempt && srForm.studentCount.errors }"
       >
       <div *ngIf="formSubmitAttempt && srForm.studentCount.errors" class="invalid-feedback">
-        <div *ngIf="srForm.studentCount.errors.max">Max student count: 50000</div>
+        <div *ngIf="srForm.studentCount.errors.max">Max student count: 30000</div>
       </div>
     </div>
   </div>

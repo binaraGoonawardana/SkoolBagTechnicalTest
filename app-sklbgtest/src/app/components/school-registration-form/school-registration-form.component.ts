@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SchoolService } from 'src/app/services/school/school.service';
 
@@ -18,6 +18,7 @@ export class SchoolRegistrationFormComponent implements OnInit {
   schoolRegistrationForm: FormGroup;
   status: FormStatus;
   formSubmitAttempt: boolean = false;
+  @Output() refreshSchoolsDirectoryEvent = new EventEmitter();
 
   constructor(private fb: FormBuilder, private schoolService: SchoolService) { }
 
@@ -53,12 +54,16 @@ export class SchoolRegistrationFormComponent implements OnInit {
       .subscribe(
         (response: any) => {
           this.schoolRegistrationForm.reset();
+          this.refreshSchoolsDirectory();
           this.formSubmitAttempt = false;
           this.status = FormStatus.Succeed;
       }, (err) => {
         this.formSubmitAttempt = false;
       });
-    
+  }
+
+  refreshSchoolsDirectory(): void {
+    this.refreshSchoolsDirectoryEvent.emit();
   }
   
 }

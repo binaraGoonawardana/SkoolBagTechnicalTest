@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { HttpResponse, School } from 'src/app/types';
+import { HttpResponse, School, Filters } from 'src/app/types';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +40,12 @@ export class SchoolService {
       .pipe(
         catchError(this.handleError)
       );
-  } 
+  }
+
+  searchSchools(filters: Filters) {
+    return this.http.post<HttpResponse>("http://localhost:3030/v1/schools/search", filters)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 }

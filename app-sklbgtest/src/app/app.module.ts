@@ -11,6 +11,7 @@ import { SchoolsDirectoryComponent } from './components/schools-directory/school
 import { SchoolsWidgetComponent } from './components/schools-widget/schools-widget.component';
 
 import { SchoolService } from "./services/school/school.service";
+import { IntractionsService } from "./services/intractions/intractions.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SchoolService } from "./services/school/school.service";
     ReactiveFormsModule
   ],
   providers: [
-    SchoolService
+    SchoolService,
+    IntractionsService
   ],
   bootstrap: [AppComponent]
 })
