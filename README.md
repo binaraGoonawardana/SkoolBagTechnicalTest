@@ -2,6 +2,8 @@
 
 ## Back-End Service
 
+Used restdb.io(json db) for persist data. 
+
 #### Running service on Locally
 
 `git clone https://github.com/binaraGoonawardana/SkoolBagTechnicalTest.git`
@@ -50,10 +52,11 @@ App will be serve on 4200 port. Go to http://localhost:4200
 
 `cd SkoolBagTechnicalTest/app-sklbgtest`
 
-Please edit angular environment.ts file with back-end service url
-cd src/environments
-Replace schoolsServiceUrl property. New value should looks like this
-http://{hostname:port}/v1/schools
+Please edit angular environment.ts file with back-end service url\
+`cd src/environments`
+Replace schoolsServiceUrl property. New value should looks like this\
+http://{hostname:port}/v1/schools\
+go back to root folder before executing below commands (`cd ../..`)
 
 `docker build -t app-technicaltest:latest .`
 
